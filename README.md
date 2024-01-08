@@ -13,6 +13,7 @@ xls_to_dat.py用于将表格文件转换为稳态数据文件；
 dat_datmain.py用于将稳态数据文件与表格文件相互转换；  
 pu_to_pu.py用于将额定容量下的标幺值转换为基准容量下的标幺值；  
 gen_to_wp.py用于将同步电源转换为直驱发电机机组；  
+data-set.py用于设置程序关于卡片格式的初始数据；  
 requirements.txt用于列出项目依赖库及其版本的文本文件；  
 可用pip install -r requirements.txt安装依赖。
 ## 三、代码描述
