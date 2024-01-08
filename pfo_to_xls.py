@@ -120,7 +120,6 @@ def sheet_L_set(sheet_L_data,sheet_L):
     range_number = 0
     for i in sheet_L_data:
         for j in sheet_L_data[i]:
-            range_number = range_number + 1
             if len(j.split()) == 8 and "/ " in j:
                 one_col_list = j.split()[0:3]
                 n = j.index(j.split()[2])
@@ -137,23 +136,25 @@ def sheet_L_set(sheet_L_data,sheet_L):
                     one_col_list.append(char)
             else:
                 one_col_list = j.split()[0:7]
-            for k in range(0,len(one_col_list)):
-                char = remove_chinese(one_col_list[k])
-                position = excel_range[0] + str(range_number + 1)
-                sheet_L.range(position).value = i
-                position = excel_range[k+1] + str(range_number + 1)
-                #分区名
-                if k == 2:
-                    sheet_L.range(position).value = char
-                # 数字
-                elif is_number(char):
-                    content = number_read_format(char)
-                    sheet_L.range(position).value = content
-                # 字母
-                else:
-                    content = char.rstrip()
-                    if content != "\n":
+            if float(i[3:]) < float(one_col_list[0].rstrip()[3:]):
+                range_number = range_number + 1
+                for k in range(0,len(one_col_list)):
+                    char = remove_chinese(one_col_list[k])
+                    position = excel_range[0] + str(range_number + 1)
+                    sheet_L.range(position).value = i
+                    position = excel_range[k+1] + str(range_number + 1)
+                    #分区名
+                    if k == 2:
+                        sheet_L.range(position).value = char
+                    # 数字
+                    elif is_number(char):
+                        content = number_read_format(char)
                         sheet_L.range(position).value = content
+                    # 字母
+                    else:
+                        content = char.rstrip()
+                        if content != "\n":
+                            sheet_L.range(position).value = content
 #总结数据
 def sheet_SM_set(sheet_SM_data,sheet_SM):
     for i in sheet_SM_data:
