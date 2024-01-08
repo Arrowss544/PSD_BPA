@@ -18,4 +18,4 @@ gen_to_wp.py用于将同步电源转换为直驱发电机机组；
 ## 四、第三方库
 xlwings——用于表格文件的读取、写入与修改。
 ## 五、仓库地址
-[https://github.com/Arrowss544/PSD_BPA](https://github.com/Arrowss544/PSD_BPA.git)https://github.com/Arrowss544/PSD_BPA.git
+https://github.com/Arrowss544/PSD_BPA.git
