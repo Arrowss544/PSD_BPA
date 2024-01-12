@@ -66,11 +66,18 @@ def get_integer_number(char):
 def net_check():
     line_list_copy=dat_line_list
     net = line_list_copy[0]
-    for i in dat_line_list:
-        if i[0] in net and i[1] not in net:
-            net.append(i[1])
-        elif i[1] in net and i[0] not in net:
-            net.append(i[0])
+    for i in range(0,len(dat_line_list)):
+        char = dat_line_list[i]
+        if char[0] in net and char[1] not in net:
+            net.append(char[1])
+        elif char[1] in net and char[0] not in net:
+            net.append(char[0])
+    for i in range(0,len(dat_line_list)):
+        char = dat_line_list[-i]
+        if char[0] in net and char[1] not in net:
+            net.append(char[1])
+        elif char[1] in net and char[0] not in net:
+            net.append(char[0])
     none_net = []
     error_flag = 1
     for i in dat_bus_list:
@@ -78,14 +85,14 @@ def net_check():
             none_net.append(i)
             error_flag = 0
     if error_flag == 0:
-        message=f"宸茬?寤烘??缃?缁?:"
+        message=f"已在网络中的节点:"
         for i in net:
-            message=message+f"{i}??"
+            message=message+f"{i},"
         crash_list.append(message)
-        message = f"瀛??ㄨ????:"
+        message = f"不在网络中的节点:"
         for i in none_net:
-            message = message + f"{i}??"
-        message = message + "涓??ㄧ?缁?涔?涓?锛?"
+            message = message + f"{i},"
+        message = message + ""
         crash_list.append(message)
 #获取excel的控制卡数据
 def get_control_data(sheet_c):
@@ -562,6 +569,7 @@ def get_line_data(sheet_l):
                                 line = line + (char + ' ' * (logth + 1 - len(char)))[1:-1] + ' '
                 else:
                     crash_list.append(f"支路数据卡第{i}行第{j}列数据不是数字!")
+        dat_line_list.append([bus1, bus2])
         line_write_data.append(line)
     return line_write_data
 #获取excel的变压器数据卡数据
@@ -634,7 +642,7 @@ def get_tran_data(sheet_t):
                     crash_list.append(f"变压器数据卡第{i}行第{j}列数据不是数字!")
         dat_line_list.append([bus1,bus2])
         tran_write_data.append(line)
-    #net_check()
+    net_check()
     return  tran_write_data
 #写入报错文件
 def crash_report():
